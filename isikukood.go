@@ -101,19 +101,11 @@ func (i Isikukood) birthday() time.Time {
 	return t
 }
 
+/* Based on: https://et.wikipedia.org/wiki/Isikukood */
 func Checksum(ik Isikukood) int {
-	// I astme kaal: 1 2 3 4 5 6 7 8 9 1
 	first_degree := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 1}
-
-	// II astme kaal: 3 4 5 6 7 8 9 1 2 3
 	second_degree := []int{3, 4, 5, 6, 7, 8, 9, 1, 2, 3}
 
-	// PART 2
-	/*
-		Isikukoodi kontrollnumber formeeritakse "Moodul 11" meetodil, kasutades I või II astme kaalu:
-		I astme kaal: 1 2 3 4 5 6 7 8 9 1
-		See tähendab, et isikukoodi kümme esimest numbrit korrutatakse igaüks omaette I astme kaaluga,
-		korrutised liidetakse. Saadud summa jagatakse 11ga. Kui jagatise jääk ei võrdu 10ga, on jääk kontrollnumbriks. */
 	checksum := 0
 	checksum_numbers := [10]int{}
 	for i := 0; i < len(ik.code)-1; i++ {
@@ -127,8 +119,6 @@ func Checksum(ik Isikukood) int {
 	if checksum%11 != 10 {
 		return checksum
 	}
-
-	// PART 2
 
 	if checksum%11 == 10 {
 		c := 0

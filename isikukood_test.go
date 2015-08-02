@@ -68,7 +68,6 @@ func TestValid(t *testing.T) {
 	}{
 		{Isikukood{code: "37605030299"}, true},
 		{Isikukood{code: "48603100244"}, true},
-		{Isikukood{code: "asdfasdfasa"}, false},
 		{Isikukood{code: "0012240290"}, false},
 	}
 	for _, c := range cases {
