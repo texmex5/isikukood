@@ -53,7 +53,7 @@ func TestBirthday(t *testing.T) {
 		{Isikukood{code: "34501234215"}, time.Date(1945, time.January, 23, 0, 0, 0, 0, time.UTC)},
 	}
 	for _, c := range cases {
-		got := c.in.birthday()
+		got := c.in.Birthday()
 
 		if got != c.want {
 			t.Errorf("TestBirthday(%v) == %v, want %v", c.in, got, c.want)
@@ -71,10 +71,10 @@ func TestValid(t *testing.T) {
 		{Isikukood{code: "0012240290"}, false},
 	}
 	for _, c := range cases {
-		got := c.in.Valid()
+		got := c.in.Validate()
 
 		if got != c.want {
-			t.Errorf("TestValid(%v) == %v, want %v", c.in, got, c.want)
+			t.Errorf("TestValidate(%v) == %v, want %v", c.in, got, c.want)
 		}
 	}
 }
@@ -90,7 +90,7 @@ func TestChecksum(t *testing.T) {
 		{Isikukood{code: "60012240290"}, 0},
 	}
 	for _, c := range cases {
-		got := Checksum(c.in)
+		got := checksum(c.in)
 
 		if got != c.want {
 			t.Errorf("ValidateChecksum(%v) == %v, want %v", c.in, got, c.want)

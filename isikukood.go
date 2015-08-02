@@ -14,16 +14,16 @@ func (i Isikukood) Code() string {
 	return i.code
 }
 
-func (i Isikukood) Valid() bool {
+func (i Isikukood) Validate() bool {
 	lastdigit, _ := strconv.Atoi(string(i.code[len(i.code)-1]))
-	return ((len(i.code) == 11) && (Checksum(i) == lastdigit))
+	return ((len(i.code) == 11) && (checksum(i) == lastdigit))
 }
 
 func (i Isikukood) BirthPlace() string {
 
 	bi, _ := strconv.Atoi(string(i.code[7:10]))
 
-	if i.birthday().Year() >= 2013 {
+	if i.Birthday().Year() >= 2013 {
 		return "Don't know"
 	}
 
@@ -85,7 +85,7 @@ func (i Isikukood) Sex() string {
 	}
 }
 
-func (i Isikukood) birthday() time.Time {
+func (i Isikukood) Birthday() time.Time {
 
 	y, _ := strconv.Atoi(i.code[1:3])
 	y += century(i)
@@ -102,7 +102,7 @@ func (i Isikukood) birthday() time.Time {
 }
 
 /* Based on: https://et.wikipedia.org/wiki/Isikukood */
-func Checksum(ik Isikukood) int {
+func checksum(ik Isikukood) int {
 	first_degree := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 1}
 	second_degree := []int{3, 4, 5, 6, 7, 8, 9, 1, 2, 3}
 
