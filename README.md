@@ -2,10 +2,11 @@
 Package for learning GO and for validating Estonian Personal Identification Number
 
 ```go
-package isikukood
+package your_package
 
 import (
 	"fmt"
+	"github.com/texmex5/isikukood"
 )
 
 func main() {
