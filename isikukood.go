@@ -7,21 +7,21 @@ import (
 )
 
 type Isikukood struct {
-	code string
+	Code string
 }
 
-func (i Isikukood) Code() string {
-	return i.code
-}
+// func (i Isikukood) Code() string {
+// 	return i.Code
+// }
 
 func (i Isikukood) Validate() bool {
-	lastdigit, _ := strconv.Atoi(string(i.code[len(i.code)-1]))
-	return ((len(i.code) == 11) && (checksum(i) == lastdigit))
+	lastdigit, _ := strconv.Atoi(string(i.Code[len(i.Code)-1]))
+	return ((len(i.Code) == 11) && (checksum(i) == lastdigit))
 }
 
 func (i Isikukood) BirthPlace() string {
 
-	bi, _ := strconv.Atoi(string(i.code[7:10]))
+	bi, _ := strconv.Atoi(string(i.Code[7:10]))
 
 	if i.Birthday().Year() >= 2013 {
 		return "Don't know"
@@ -71,7 +71,7 @@ func (i Isikukood) BirthPlace() string {
 }
 
 func (i Isikukood) Sex() string {
-	sex_identifier, err := strconv.Atoi(string(i.code[:1]))
+	sex_identifier, err := strconv.Atoi(string(i.Code[:1]))
 	if err != nil {
 
 	}
@@ -87,12 +87,12 @@ func (i Isikukood) Sex() string {
 
 func (i Isikukood) Birthday() time.Time {
 
-	y, _ := strconv.Atoi(i.code[1:3])
+	y, _ := strconv.Atoi(i.Code[1:3])
 	y += century(i)
 
 	year := strconv.Itoa(y)
-	month := i.code[3:5]
-	day := i.code[5:7]
+	month := i.Code[3:5]
+	day := i.Code[5:7]
 
 	date := fmt.Sprint(month + "/" + day + "/" + year)
 
@@ -108,8 +108,8 @@ func checksum(ik Isikukood) int {
 
 	checksum := 0
 	checksum_numbers := [10]int{}
-	for i := 0; i < len(ik.code)-1; i++ {
-		n, _ := strconv.Atoi(string(ik.code[i]))
+	for i := 0; i < len(ik.Code)-1; i++ {
+		n, _ := strconv.Atoi(string(ik.Code[i]))
 		checksum += first_degree[i] * n
 		checksum_numbers[i] = checksum
 	}
@@ -135,7 +135,7 @@ func checksum(ik Isikukood) int {
 }
 
 func century(i Isikukood) int {
-	sex_identifier, _ := strconv.Atoi(string(i.code[:1]))
+	sex_identifier, _ := strconv.Atoi(string(i.Code[:1]))
 
 	switch sex_identifier {
 	case 1, 2:
