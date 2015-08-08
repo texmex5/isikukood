@@ -6,14 +6,15 @@ package your_package
 
 import (
 	"fmt"
-	"github.com/texmex5/isikukood"
+	isikukood "github.com/texmex5/isikukood"
 )
 
 func main() {
-	isikukood := Isikukood{code: "37605030299"}
-	fmt.Printf("Is valid? %d", isikukood.Validate())
-	fmt.Printf("Birthday: %v", isikukood.Birthday())
-	fmt.Printf("Sex: %v", isikukood.Sex())
+	i := isikukood.Isikukood{Code: "37605030299"}
+	fmt.Printf("Is valid? %d", i.Validate())
+	fmt.Printf("Birthday: %v", i.Birthday())
+	fmt.Printf("Sex: %v", i.Sex())
 }
+
 
 ```
