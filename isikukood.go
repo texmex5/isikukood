@@ -10,10 +10,6 @@ type Isikukood struct {
 	Code string
 }
 
-// func (i Isikukood) Code() string {
-// 	return i.Code
-// }
-
 func (i Isikukood) Validate() bool {
 	lastdigit, _ := strconv.Atoi(string(i.Code[len(i.Code)-1]))
 	return ((len(i.Code) == 11) && (checksum(i) == lastdigit))
